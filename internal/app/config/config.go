@@ -6,7 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
 
-	"github.com/GitLivreru/catalog-service/internal/app/config/section"
+	"github.com/GetLivreru/catalog-service/internal/app/config/section"
 )
 
 type Config struct {

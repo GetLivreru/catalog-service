@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/GitLivreru/catalog-service/internal/app/config"
+	"github.com/GetLivreru/catalog-service/internal/app/config"
 )
 
 func main() {
