@@ -1,0 +1,7 @@
+CREATE TABLE category (
+    id BIGSERIAL NOT NULL,
+    guid UUID NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL
+);

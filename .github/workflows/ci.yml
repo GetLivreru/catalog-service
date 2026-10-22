@@ -30,6 +30,25 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: catalog_user
+          POSTGRES_PASSWORD: catalog_pass
+          POSTGRES_DB: catalog_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U catalog_user -d catalog_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      APP_REPOSITORY_POSTGRES_ADDRESS: localhost:5432
+      APP_REPOSITORY_POSTGRES_USERNAME: catalog_user
+      APP_REPOSITORY_POSTGRES_PASSWORD: catalog_pass
+      APP_REPOSITORY_POSTGRES_NAME: catalog_test
     steps:
       - uses: actions/checkout@v4
 
@@ -40,7 +59,7 @@ jobs:
           cache-dependency-path: go.sum
 
       - name: Run tests
-        run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+        run: go test -tags=integration -race -coverprofile=coverage.out -covermode=atomic ./...
 
   lint:
     name: Lint
