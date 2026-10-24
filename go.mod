@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	github.com/gofrs/uuid v4.4.0+incompatible
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/puzpuzpuz/xsync/v3 v3.5.1 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
