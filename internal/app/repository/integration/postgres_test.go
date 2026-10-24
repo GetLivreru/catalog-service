@@ -43,6 +43,7 @@ func TestRepositories(t *testing.T) {
 	if repeatVersion != 2 {
 		t.Fatal("migration is not idempotent")
 	}
+	assertCatalogSchema(t, ctx, client)
 	cats := pcategory.NewRepoFromPostgres(client)
 	products := pproduct.NewRepoFromPostgres(client)
 	now := time.Now().UTC().Truncate(time.Microsecond)
@@ -160,4 +161,44 @@ func TestRepositories(t *testing.T) {
 	must(cats.Delete(ctx, cat.GUID))
 	must(cats.Delete(ctx, cat.GUID))
 	t.Log("Cleanup complete")
+}
+
+// assertCatalogSchema checks the migrated database, including defaults unused by CRUD.
+func assertCatalogSchema(t *testing.T, ctx context.Context, client *rcpostgres.Client) {
+	t.Helper()
+	for _, table := range []string{"category", "product"} {
+		t.Run(table+" schema", func(t *testing.T) {
+			for _, column := range []string{"id", "name"} {
+				var count int
+				err := client.GetRawBunDB().NewRaw(`SELECT count(*)
+     FROM information_schema.table_constraints tc
+     JOIN information_schema.key_column_usage kcu
+      USING (constraint_catalog, constraint_schema, constraint_name, table_catalog, table_schema, table_name)
+     WHERE tc.table_schema = 'public' AND tc.table_name = ?
+      AND tc.constraint_type = 'UNIQUE' AND kcu.column_name = ?`, table, column).Scan(ctx, &count)
+				if err != nil || count != 1 {
+					t.Fatalf("%s.%s UNIQUE: count=%d err=%v", table, column, count, err)
+				}
+			}
+			var count int
+			err := client.GetRawBunDB().NewRaw(`SELECT count(*) FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = ? AND column_name = 'name'
+     AND data_type = 'character varying' AND character_maximum_length = 255 AND is_nullable = 'NO'`, table).Scan(ctx, &count)
+			if err != nil || count != 1 {
+				t.Fatalf("%s.name must be VARCHAR(255) NOT NULL: %v", table, err)
+			}
+			err = client.GetRawBunDB().NewRaw(`SELECT count(*) FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = ? AND column_name IN ('created_at','updated_at')
+     AND column_default = 'now()' AND is_nullable = 'NO'`, table).Scan(ctx, &count)
+			if err != nil || count != 2 {
+				t.Fatalf("%s timestamp defaults: count=%d err=%v", table, count, err)
+			}
+			err = client.GetRawBunDB().NewRaw(`SELECT count(*) FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = ? AND column_name = 'guid'
+     AND column_default IS NULL AND is_nullable = 'NO'`, table).Scan(ctx, &count)
+			if err != nil || count != 1 {
+				t.Fatalf("%s.guid must have no default: %v", table, err)
+			}
+		})
+	}
 }
