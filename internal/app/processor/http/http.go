@@ -16,24 +16,13 @@ type httpProc struct {
 	addr   string
 }
 
-func NewHTTP(hHealth rhandler.Health, cfg section.ProcessorWebServer) *httpProc {
-	// TODO: реализуйте
-	//
-	// Шаг 1: Создайте роутер
-	// - r := mux.NewRouter()
+func NewHTTP(hHealth rhandler.Health, hCategory rhandler.Category, hProduct rhandler.Product, cfg section.ProcessorWebServer) *httpProc {
 	r := mux.NewRouter()
-	//
-	// Шаг 2: Зарегистрируйте NotFoundHandler
-	// - r.NotFoundHandler = http.HandlerFunc(handlerNotFound)
 	r.NotFoundHandler = http.HandlerFunc(handlerNotFound)
-	//
-	// Шаг 3: Зарегистрируйте health-check
-	// - vGenericRegHealthCheck(r, hHealth)
 	vGenericRegHealthCheck(r, hHealth)
-
-	//
-	// Шаг 4: Логирование маршрутов (опционально)
-	// - Используйте r.Walk() для вывода зарегистрированных путей
+	rV1 := r.PathPrefix("/v1").Subrouter()
+	v1RegCategoryHandler(rV1, hCategory)
+	v1RegProductHandler(rV1, hProduct)
 
 	p := httpProc{addr: fmt.Sprintf(":%d", cfg.ListenPort)}
 	p.server.Addr = p.addr
