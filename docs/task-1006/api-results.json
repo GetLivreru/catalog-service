@@ -1,0 +1,1246 @@
+[
+  {
+    "label": "Create category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "API category a87f68e45f"
+    },
+    "status": 201,
+    "response": {
+      "guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "name": "API category a87f68e45f",
+      "created_at": "2026-10-31T15:20:17.647383+05:00"
+    }
+  },
+  {
+    "label": "Duplicate category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "API category a87f68e45f"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Empty name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": ""
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'required' tag"
+    }
+  },
+  {
+    "label": "Short name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "A"
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'min' tag"
+    }
+  },
+  {
+    "label": "Missing name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {},
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'required' tag"
+    }
+  },
+  {
+    "label": "Malformed JSON",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": "not json",
+    "status": 400,
+    "response": {
+      "error": "invalid character 'o' in literal null (expecting 'u')"
+    }
+  },
+  {
+    "label": "Long name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'max' tag"
+    }
+  },
+  {
+    "label": "Create price fixture 500",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Price 500 a87f68e45f",
+      "price": 500,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+      "name": "Price 500 a87f68e45f",
+      "description": null,
+      "price": 500,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.66055+05:00"
+    }
+  },
+  {
+    "label": "Create price fixture 1000",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Price 1000 a87f68e45f",
+      "price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+      "name": "Price 1000 a87f68e45f",
+      "description": null,
+      "price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.667878+05:00"
+    }
+  },
+  {
+    "label": "Create price fixture 3000",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Price 3000 a87f68e45f",
+      "price": 3000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+      "name": "Price 3000 a87f68e45f",
+      "description": null,
+      "price": 3000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.671023+05:00"
+    }
+  },
+  {
+    "label": "Create price fixture 5000",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Price 5000 a87f68e45f",
+      "price": 5000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+      "name": "Price 5000 a87f68e45f",
+      "description": null,
+      "price": 5000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.674011+05:00"
+    }
+  },
+  {
+    "label": "Create price fixture 6000",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Price 6000 a87f68e45f",
+      "price": 6000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+      "name": "Price 6000 a87f68e45f",
+      "description": null,
+      "price": 6000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.67601+05:00"
+    }
+  },
+  {
+    "label": "Inclusive range",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000,
+      "max_price": 5000
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Inclusive range with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000,
+      "max_price": 5000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Lower bound only",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Lower bound only with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Upper bound only",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "max_price": 1000
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Upper bound only with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "max_price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Exact price",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000,
+      "max_price": 1000
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Exact price with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 1000,
+      "max_price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "No filters",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {},
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "No filters with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Reversed range",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 5000,
+      "max_price": 1000
+    },
+    "status": 200,
+    "response": {
+      "data": []
+    }
+  },
+  {
+    "label": "Reversed range with category",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 5000,
+      "max_price": 1000,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": []
+    }
+  },
+  {
+    "label": "Invalid min_price=0",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": 0
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductList.MinPrice' Error:Field validation for 'MinPrice' failed on the 'gt' tag"
+    }
+  },
+  {
+    "label": "Invalid min_price=-1",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": -1
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductList.MinPrice' Error:Field validation for 'MinPrice' failed on the 'gt' tag"
+    }
+  },
+  {
+    "label": "Invalid min_price=bad",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "min_price": "bad"
+    },
+    "status": 400,
+    "response": {
+      "error": "json: cannot unmarshal string into Go struct field RequestProductList.min_price of type int64"
+    }
+  },
+  {
+    "label": "Invalid max_price=0",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "max_price": 0
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductList.MaxPrice' Error:Field validation for 'MaxPrice' failed on the 'gt' tag"
+    }
+  },
+  {
+    "label": "Invalid max_price=-1",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "max_price": -1
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductList.MaxPrice' Error:Field validation for 'MaxPrice' failed on the 'gt' tag"
+    }
+  },
+  {
+    "label": "Invalid max_price=bad",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "max_price": "bad"
+    },
+    "status": 400,
+    "response": {
+      "error": "json: cannot unmarshal string into Go struct field RequestProductList.max_price of type int64"
+    }
+  },
+  {
+    "label": "Reject long product description",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Invalid a87f68e45f",
+      "price": 100,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "description": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductCreate.Description' Error:Field validation for 'Description' failed on the 'max' tag"
+    }
+  },
+  {
+    "label": "Create product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "API product a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+      "name": "API product a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.690188+05:00"
+    }
+  },
+  {
+    "label": "Duplicate product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "API product a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "List categories",
+    "method": "POST",
+    "path": "/v1/category/list",
+    "request": null,
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "name": "API category a87f68e45f",
+          "created_at": "2026-10-31T10:20:17.647383Z",
+          "updated_at": "2026-10-31T10:20:17.647383Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "List products",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {},
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        },
+        {
+          "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+          "name": "API product a87f68e45f",
+          "description": "API smoke test",
+          "price": 12345,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.690188Z",
+          "updated_at": "2026-10-31T10:20:17.690188Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Filter products",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+          "name": "Price 500 a87f68e45f",
+          "description": null,
+          "price": 500,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.66055Z",
+          "updated_at": "2026-10-31T10:20:17.66055Z"
+        },
+        {
+          "guid": "efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+          "name": "Price 1000 a87f68e45f",
+          "description": null,
+          "price": 1000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.667878Z",
+          "updated_at": "2026-10-31T10:20:17.667878Z"
+        },
+        {
+          "guid": "8aa07cc0-abc4-4a37-82a2-537778c08abb",
+          "name": "Price 3000 a87f68e45f",
+          "description": null,
+          "price": 3000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.671023Z",
+          "updated_at": "2026-10-31T10:20:17.671023Z"
+        },
+        {
+          "guid": "67b1581b-be1f-4c22-8651-a6977f766cfb",
+          "name": "Price 5000 a87f68e45f",
+          "description": null,
+          "price": 5000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.674011Z",
+          "updated_at": "2026-10-31T10:20:17.674011Z"
+        },
+        {
+          "guid": "59bc89fc-39e3-4973-ade9-83b5e7042f96",
+          "name": "Price 6000 a87f68e45f",
+          "description": null,
+          "price": 6000,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.67601Z",
+          "updated_at": "2026-10-31T10:20:17.67601Z"
+        },
+        {
+          "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+          "name": "API product a87f68e45f",
+          "description": "API smoke test",
+          "price": 12345,
+          "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+          "created_at": "2026-10-31T10:20:17.690188Z",
+          "updated_at": "2026-10-31T10:20:17.690188Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Empty product list is an array",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "d716d57a-3301-46ad-9cec-c12f5547390e"
+    },
+    "status": 200,
+    "response": {
+      "data": []
+    }
+  },
+  {
+    "label": "Category with linked products",
+    "method": "DELETE",
+    "path": "/v1/category/94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+    "request": null,
+    "status": 409,
+    "response": {
+      "error": "category has linked products"
+    }
+  },
+  {
+    "label": "Product with missing category",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Missing category a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "06ab1033-ddce-4cee-976f-893d0fb53a04"
+    },
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "PATCH name without price",
+    "method": "PATCH",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": {
+      "name": "Renamed a87f68e45f"
+    },
+    "status": 200,
+    "response": {
+      "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+      "name": "Renamed a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T10:20:17.690188Z",
+      "updated_at": "2026-10-31T15:20:17.697732+05:00"
+    }
+  },
+  {
+    "label": "PATCH price zero preserves price",
+    "method": "PATCH",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": {
+      "price": 0
+    },
+    "status": 200,
+    "response": {
+      "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+      "name": "Renamed a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T10:20:17.690188Z",
+      "updated_at": "2026-10-31T15:20:17.701708+05:00"
+    }
+  },
+  {
+    "label": "Reject negative PATCH price",
+    "method": "PATCH",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": {
+      "price": -1
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductUpdate.Price' Error:Field validation for 'Price' failed on the 'gt' tag"
+    }
+  },
+  {
+    "label": "Reject missing create fields",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Invalid"
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestProductCreate.Price' Error:Field validation for 'Price' failed on the 'required' tag\nKey: 'RequestProductCreate.CategoryGUID' Error:Field validation for 'CategoryGUID' failed on the 'required' tag"
+    }
+  },
+  {
+    "label": "Reject empty category name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": ""
+    },
+    "status": 400,
+    "response": {
+      "error": "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'required' tag"
+    }
+  },
+  {
+    "label": "Reject invalid GUID",
+    "method": "DELETE",
+    "path": "/v1/product/not-a-guid",
+    "request": null,
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Reject invalid category filter",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "bad"
+    },
+    "status": 400,
+    "response": {
+      "error": "uuid: incorrect UUID length 3 in string \"bad\""
+    }
+  },
+  {
+    "label": "Missing category update",
+    "method": "PATCH",
+    "path": "/v1/category/fc138e1b-5e08-4044-b99c-754f9220946a",
+    "request": {},
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing category delete",
+    "method": "DELETE",
+    "path": "/v1/category/fc138e1b-5e08-4044-b99c-754f9220946a",
+    "request": null,
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing product update",
+    "method": "PATCH",
+    "path": "/v1/product/5bd89fa0-0aed-46f0-b648-fb231fe571fb",
+    "request": {},
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing product delete",
+    "method": "DELETE",
+    "path": "/v1/product/5bd89fa0-0aed-46f0-b648-fb231fe571fb",
+    "request": null,
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Create second category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "Second a87f68e45f"
+    },
+    "status": 201,
+    "response": {
+      "guid": "4c9d4a47-157d-4c3e-b74a-96fcd05661e3",
+      "name": "Second a87f68e45f",
+      "created_at": "2026-10-31T15:20:17.709155+05:00"
+    }
+  },
+  {
+    "label": "Reject duplicate category rename",
+    "method": "PATCH",
+    "path": "/v1/category/4c9d4a47-157d-4c3e-b74a-96fcd05661e3",
+    "request": {
+      "name": "API category a87f68e45f"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Allow unchanged category name",
+    "method": "PATCH",
+    "path": "/v1/category/94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+    "request": {
+      "name": "API category a87f68e45f"
+    },
+    "status": 200,
+    "response": {
+      "guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "name": "API category a87f68e45f",
+      "created_at": "2026-10-31T10:20:17.647383Z",
+      "updated_at": "2026-10-31T15:20:17.712347+05:00"
+    }
+  },
+  {
+    "label": "Rename category",
+    "method": "PATCH",
+    "path": "/v1/category/94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+    "request": {
+      "name": "Renamed category a87f68e45f"
+    },
+    "status": 200,
+    "response": {
+      "guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "name": "Renamed category a87f68e45f",
+      "created_at": "2026-10-31T10:20:17.647383Z",
+      "updated_at": "2026-10-31T15:20:17.714239+05:00"
+    }
+  },
+  {
+    "label": "Create second product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Second product a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81"
+    },
+    "status": 201,
+    "response": {
+      "guid": "7bc1acbc-2d86-4df8-b668-90fccbab0a25",
+      "name": "Second product a87f68e45f",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+      "created_at": "2026-10-31T15:20:17.718117+05:00"
+    }
+  },
+  {
+    "label": "Reject duplicate product rename",
+    "method": "PATCH",
+    "path": "/v1/product/7bc1acbc-2d86-4df8-b668-90fccbab0a25",
+    "request": {
+      "name": "Renamed a87f68e45f"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Reject missing category on PATCH",
+    "method": "PATCH",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": {
+      "category_guid": "9717f219-58c6-4509-8b6e-34eb780afdb0"
+    },
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Update price description and category",
+    "method": "PATCH",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": {
+      "price": 23456,
+      "description": "",
+      "category_guid": "4c9d4a47-157d-4c3e-b74a-96fcd05661e3"
+    },
+    "status": 200,
+    "response": {
+      "guid": "9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+      "name": "Renamed a87f68e45f",
+      "description": "",
+      "price": 23456,
+      "category_guid": "4c9d4a47-157d-4c3e-b74a-96fcd05661e3",
+      "created_at": "2026-10-31T10:20:17.690188Z",
+      "updated_at": "2026-10-31T15:20:17.723362+05:00"
+    }
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/8f77ae32-1f6f-4bee-a727-a7f38d15c197",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/efdded0a-e9d2-4df7-96fd-2ffe576460d0",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/8aa07cc0-abc4-4a37-82a2-537778c08abb",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/67b1581b-be1f-4c22-8651-a6977f766cfb",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/59bc89fc-39e3-4973-ade9-83b5e7042f96",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/9ea018f6-0fd2-484e-8fe8-a68b14b4cdf4",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/7bc1acbc-2d86-4df8-b668-90fccbab0a25",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test category",
+    "method": "DELETE",
+    "path": "/v1/category/94fe9b8f-cbbc-4c3c-8c83-55e2e1b58d81",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test category",
+    "method": "DELETE",
+    "path": "/v1/category/4c9d4a47-157d-4c3e-b74a-96fcd05661e3",
+    "request": null,
+    "status": 200,
+    "response": null
+  }
+]
