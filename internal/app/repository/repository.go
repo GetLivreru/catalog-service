@@ -21,5 +21,5 @@ type Product interface {
 	GetByGUIDs(ctx context.Context, guids []uuid.UUID) ([]entity.Product, error)
 	Update(ctx context.Context, product entity.Product) error
 	Delete(ctx context.Context, guid uuid.UUID) error
-	List(ctx context.Context, name *string, categoryGUID *uuid.UUID) ([]entity.Product, error)
+	List(ctx context.Context, name *string, categoryGUID *uuid.UUID, minPrice, maxPrice *int64) ([]entity.Product, error)
 }
