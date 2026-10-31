@@ -1,0 +1,445 @@
+[
+  {
+    "label": "Create category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "API category dc1343ea01"
+    },
+    "status": 201,
+    "response": {
+      "guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "name": "API category dc1343ea01",
+      "created_at": "2026-10-29T22:01:22.617995+05:00"
+    }
+  },
+  {
+    "label": "Duplicate category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "API category dc1343ea01"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Create product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "API product dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7"
+    },
+    "status": 201,
+    "response": {
+      "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+      "name": "API product dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "created_at": "2026-10-29T22:01:22.622761+05:00"
+    }
+  },
+  {
+    "label": "Duplicate product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "API product dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "List categories",
+    "method": "POST",
+    "path": "/v1/category/list",
+    "request": null,
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+          "name": "API category dc1343ea01",
+          "created_at": "2026-10-29T17:01:22.617995Z",
+          "updated_at": "2026-10-29T17:01:22.617995Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "List products",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {},
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+          "name": "API product dc1343ea01",
+          "description": "API smoke test",
+          "price": 12345,
+          "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+          "created_at": "2026-10-29T17:01:22.622761Z",
+          "updated_at": "2026-10-29T17:01:22.622761Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Filter products",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7"
+    },
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+          "name": "API product dc1343ea01",
+          "description": "API smoke test",
+          "price": 12345,
+          "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+          "created_at": "2026-10-29T17:01:22.622761Z",
+          "updated_at": "2026-10-29T17:01:22.622761Z"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Empty product list is an array",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "aafd23d3-fc6d-402f-9896-9cdc0504ba04"
+    },
+    "status": 200,
+    "response": {
+      "data": []
+    }
+  },
+  {
+    "label": "Category with linked products",
+    "method": "DELETE",
+    "path": "/v1/category/c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+    "request": null,
+    "status": 409,
+    "response": {
+      "error": "category has linked products"
+    }
+  },
+  {
+    "label": "Product with missing category",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Missing category dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "5c83888d-cabb-453b-ba52-9bddb3fc4258"
+    },
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "PATCH name without price",
+    "method": "PATCH",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": {
+      "name": "Renamed dc1343ea01"
+    },
+    "status": 200,
+    "response": {
+      "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+      "name": "Renamed dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "created_at": "2026-10-29T17:01:22.622761Z",
+      "updated_at": "2026-10-29T22:01:22.631332+05:00"
+    }
+  },
+  {
+    "label": "PATCH price zero preserves price",
+    "method": "PATCH",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": {
+      "price": 0
+    },
+    "status": 200,
+    "response": {
+      "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+      "name": "Renamed dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "created_at": "2026-10-29T17:01:22.622761Z",
+      "updated_at": "2026-10-29T22:01:22.633576+05:00"
+    }
+  },
+  {
+    "label": "Reject negative PATCH price",
+    "method": "PATCH",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": {
+      "price": -1
+    },
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Reject missing create fields",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Invalid"
+    },
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Reject empty category name",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": ""
+    },
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Reject invalid GUID",
+    "method": "DELETE",
+    "path": "/v1/product/not-a-guid",
+    "request": null,
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Reject invalid category filter",
+    "method": "POST",
+    "path": "/v1/product/list",
+    "request": {
+      "category_guid": "bad"
+    },
+    "status": 400,
+    "response": {
+      "error": "incorrect parameters"
+    }
+  },
+  {
+    "label": "Missing category update",
+    "method": "PATCH",
+    "path": "/v1/category/c79e050a-77f6-41ee-98b7-7cd29ea03387",
+    "request": {},
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing category delete",
+    "method": "DELETE",
+    "path": "/v1/category/c79e050a-77f6-41ee-98b7-7cd29ea03387",
+    "request": null,
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing product update",
+    "method": "PATCH",
+    "path": "/v1/product/3796afeb-6dfe-47ca-9742-c9dd984745cb",
+    "request": {},
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Missing product delete",
+    "method": "DELETE",
+    "path": "/v1/product/3796afeb-6dfe-47ca-9742-c9dd984745cb",
+    "request": null,
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Create second category",
+    "method": "POST",
+    "path": "/v1/category/create",
+    "request": {
+      "name": "Second dc1343ea01"
+    },
+    "status": 201,
+    "response": {
+      "guid": "0ed98cd9-a57d-46ae-9dc8-7a8650f83d51",
+      "name": "Second dc1343ea01",
+      "created_at": "2026-10-29T22:01:22.639743+05:00"
+    }
+  },
+  {
+    "label": "Reject duplicate category rename",
+    "method": "PATCH",
+    "path": "/v1/category/0ed98cd9-a57d-46ae-9dc8-7a8650f83d51",
+    "request": {
+      "name": "API category dc1343ea01"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Allow unchanged category name",
+    "method": "PATCH",
+    "path": "/v1/category/c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+    "request": {
+      "name": "API category dc1343ea01"
+    },
+    "status": 200,
+    "response": {
+      "guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "name": "API category dc1343ea01",
+      "created_at": "2026-10-29T17:01:22.617995Z",
+      "updated_at": "2026-10-29T22:01:22.643024+05:00"
+    }
+  },
+  {
+    "label": "Rename category",
+    "method": "PATCH",
+    "path": "/v1/category/c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+    "request": {
+      "name": "Renamed category dc1343ea01"
+    },
+    "status": 200,
+    "response": {
+      "guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "name": "Renamed category dc1343ea01",
+      "created_at": "2026-10-29T17:01:22.617995Z",
+      "updated_at": "2026-10-29T22:01:22.644947+05:00"
+    }
+  },
+  {
+    "label": "Create second product",
+    "method": "POST",
+    "path": "/v1/product/create",
+    "request": {
+      "name": "Second product dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7"
+    },
+    "status": 201,
+    "response": {
+      "guid": "00a096a1-efdf-4ddd-987b-4b877a070c22",
+      "name": "Second product dc1343ea01",
+      "description": "API smoke test",
+      "price": 12345,
+      "category_guid": "c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+      "created_at": "2026-10-29T22:01:22.647419+05:00"
+    }
+  },
+  {
+    "label": "Reject duplicate product rename",
+    "method": "PATCH",
+    "path": "/v1/product/00a096a1-efdf-4ddd-987b-4b877a070c22",
+    "request": {
+      "name": "Renamed dc1343ea01"
+    },
+    "status": 409,
+    "response": {
+      "error": "already exists"
+    }
+  },
+  {
+    "label": "Reject missing category on PATCH",
+    "method": "PATCH",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": {
+      "category_guid": "6a25fa7a-98f2-483e-a383-bef4aa187be7"
+    },
+    "status": 404,
+    "response": {
+      "error": "not found"
+    }
+  },
+  {
+    "label": "Update price description and category",
+    "method": "PATCH",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": {
+      "price": 23456,
+      "description": "",
+      "category_guid": "0ed98cd9-a57d-46ae-9dc8-7a8650f83d51"
+    },
+    "status": 200,
+    "response": {
+      "guid": "afefc870-7061-43ac-afb0-c1cb4ef415ee",
+      "name": "Renamed dc1343ea01",
+      "description": "",
+      "price": 23456,
+      "category_guid": "0ed98cd9-a57d-46ae-9dc8-7a8650f83d51",
+      "created_at": "2026-10-29T17:01:22.622761Z",
+      "updated_at": "2026-10-29T22:01:22.65132+05:00"
+    }
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/afefc870-7061-43ac-afb0-c1cb4ef415ee",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test product",
+    "method": "DELETE",
+    "path": "/v1/product/00a096a1-efdf-4ddd-987b-4b877a070c22",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test category",
+    "method": "DELETE",
+    "path": "/v1/category/c33d51c0-f24a-40bd-9b52-5812cad3e4b7",
+    "request": null,
+    "status": 200,
+    "response": null
+  },
+  {
+    "label": "Delete test category",
+    "method": "DELETE",
+    "path": "/v1/category/0ed98cd9-a57d-46ae-9dc8-7a8650f83d51",
+    "request": null,
+    "status": 200,
+    "response": null
+  }
+]
