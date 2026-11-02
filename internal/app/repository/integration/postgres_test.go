@@ -89,7 +89,7 @@ func TestRepositories(t *testing.T) {
 	if err := cats.Delete(ctx, cat.GUID); err == nil {
 		t.Fatal("ON DELETE RESTRICT failed")
 	}
-	items, err := products.List(ctx, nil, &cat.GUID)
+	items, err := products.List(ctx, nil, &cat.GUID, nil, nil)
 	must(err)
 	if len(items) != 1 || items[0].Description == nil || *items[0].Description != desc {
 		t.Fatalf("unexpected products: %+v", items)
@@ -115,7 +115,7 @@ func TestRepositories(t *testing.T) {
 	}{
 		{nil, nil, 1}, {&prod.Name, nil, 1}, {nil, &cat.GUID, 1}, {&prod.Name, &cat.GUID, 1},
 	} {
-		rows, err := products.List(ctx, filter.name, filter.category)
+		rows, err := products.List(ctx, filter.name, filter.category, nil, nil)
 		must(err)
 		if len(rows) < filter.want {
 			t.Fatal("product filters missed record")
@@ -123,12 +123,12 @@ func TestRepositories(t *testing.T) {
 	}
 	missing := uuid.Must(uuid.NewV4())
 	absent := "missing-" + missing.String()
-	items, err = products.List(ctx, &absent, &cat.GUID)
+	items, err = products.List(ctx, &absent, &cat.GUID, nil, nil)
 	must(err)
 	if len(items) != 0 {
 		t.Fatal("product name filter ignored")
 	}
-	items, err = products.List(ctx, &prod.Name, &missing)
+	items, err = products.List(ctx, &prod.Name, &missing, nil, nil)
 	must(err)
 	if len(items) != 0 {
 		t.Fatal("product category filter ignored")
