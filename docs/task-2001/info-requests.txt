@@ -1,1 +1,0 @@
-9:56AM ERR DELETE /v1/category/invalid-guid finished (or aborted) with error error="incorrect parameters" client_ip=127.0.0.1:53120 exec_time="32.834µs"

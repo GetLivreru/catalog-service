@@ -50,7 +50,8 @@ func Load(args LoadArgs) {
 	}
 	level, err := zerolog.ParseLevel(Root.Monitor.LogLevel)
 	if err != nil {
-		log.Fatal().Err(err).Msg("Invalid log level")
+		log.Warn().Err(err).Str("log_level", Root.Monitor.LogLevel).Msg("Invalid log level, falling back to debug")
+		level = zerolog.DebugLevel
 	}
 	log.Logger = createLogger(level, args.Output)
 	log.Info().Str("log_level", level.String()).Msg("Logger re-initialized with config level")

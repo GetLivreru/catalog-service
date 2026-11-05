@@ -1,2 +1,0 @@
-9:56AM DBG POST /v1/category/list finished with no error client_ip=127.0.0.1:53044 exec_time=3.572ms
-9:56AM ERR DELETE /v1/category/invalid-guid finished (or aborted) with error error="incorrect parameters" client_ip=127.0.0.1:53045 exec_time="255.834µs"
