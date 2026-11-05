@@ -22,7 +22,7 @@ func TestRepositories(t *testing.T) {
 		t.Skip("set APP_REPOSITORY_POSTGRES_* for a dedicated test database")
 	}
 	ctx := context.Background()
-	config.Load()
+	config.Load(config.LoadArgs{Output: os.Stdout})
 	client, err := rcpostgres.NewClient(ctx, config.Root.Repository.Postgres)
 	must := func(err error) {
 		t.Helper()

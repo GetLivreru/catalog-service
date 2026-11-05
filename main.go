@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
+	"os"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/GetLivreru/catalog-service/internal/app/config"
 	hcategory "github.com/GetLivreru/catalog-service/internal/app/handler/http/category"
@@ -19,13 +21,13 @@ import (
 
 func main() {
 	if err := run(); err != nil {
-		log.Fatal(err)
+		log.Fatal().Err(err).Msg("Application failed")
 	}
 }
 
 func run() error {
 	ctx := context.Background()
-	config.Load()
+	config.Load(config.LoadArgs{Output: os.Stdout, EnableSimpleLog: true})
 
 	cfg := config.Root
 	pgClient, err := rcpostgres.NewClient(ctx, cfg.Repository.Postgres)
@@ -34,7 +36,7 @@ func run() error {
 	}
 	defer func() {
 		if err := pgClient.GetRawBunDB().Close(); err != nil {
-			log.Printf("Failed to close PostgreSQL: %v", err)
+			log.Error().Err(err).Msg("Failed to close PostgreSQL")
 		}
 	}()
 
@@ -43,9 +45,9 @@ func run() error {
 		return fmt.Errorf("failed to run migrations: %w", err)
 	}
 	if oldVer != newVer {
-		log.Printf("Database migrated old_version=%d new_version=%d", oldVer, newVer)
+		log.Info().Int64("old_version", oldVer).Int64("new_version", newVer).Msg("Database migrated")
 	} else {
-		log.Printf("Database is up to date version=%d", newVer)
+		log.Info().Int64("version", newVer).Msg("Database is up to date")
 	}
 
 	categoryRepo := pcategory.NewRepoFromPostgres(pgClient)
