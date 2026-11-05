@@ -122,3 +122,38 @@ func TestValidatorReflectionAndConcurrentInit(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+// Bind must return an HTTP-aware error even without the public wrapper.
+func TestBindingErrorContract(t *testing.T) {
+	type query struct {
+		Min int64 `form:"min_price" binding:"gt=0"`
+	}
+	for _, tc := range []struct {
+		name    string
+		binder  Binding
+		request *http.Request
+		target  any
+		message string
+	}{
+		{"nil JSON request", jsonBinding{}, nil, &entity.RequestCategoryCreate{}, "invalid request"},
+		{"nil JSON body", jsonBinding{}, &http.Request{}, &entity.RequestCategoryCreate{}, "invalid request"},
+		{"malformed JSON", jsonBinding{}, httptest.NewRequest(http.MethodPost, "/", strings.NewReader("not json")), &entity.RequestCategoryCreate{}, "incorrect parameters"},
+		{"wrong JSON type", jsonBinding{}, httptest.NewRequest(http.MethodPost, "/", strings.NewReader(`{"name":123}`)), &entity.RequestCategoryCreate{}, "incorrect parameters"},
+		{"empty JSON body", jsonBinding{}, httptest.NewRequest(http.MethodPost, "/", nil), &entity.RequestCategoryCreate{}, "incorrect parameters"},
+		{"validation message", jsonBinding{}, httptest.NewRequest(http.MethodPost, "/", strings.NewReader(`{"name":"A"}`)), &entity.RequestCategoryCreate{}, "Key: 'RequestCategoryCreate.Name' Error:Field validation for 'Name' failed on the 'min' tag"},
+		{"nil query request", queryBinding{}, nil, &query{}, "invalid request"},
+		{"query decoding", queryBinding{}, httptest.NewRequest(http.MethodGet, "/?min_price=bad", nil), &query{}, ""},
+		{"query validation", queryBinding{}, httptest.NewRequest(http.MethodGet, "/?min_price=0", nil), &query{}, ""},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			err := tc.binder.Bind(tc.request, tc.target)
+			if err == nil {
+				t.Fatal("expected binding error")
+			}
+			if tc.message != "" && err.Error() != tc.message {
+				t.Fatalf("error=%q want=%q", err.Error(), tc.message)
+			}
+			assertBadRequest(t, err)
+		})
+	}
+}

@@ -24,6 +24,16 @@ func NewHTTP(hHealth rhandler.Health, hCategory rhandler.Category, hProduct rhan
 	v1RegCategoryHandler(rV1, hCategory)
 	v1RegProductHandler(rV1, hProduct)
 
+	_ = r.Walk(func(route *mux.Route, _ *mux.Router, _ []*mux.Route) error {
+		path, _ := route.GetPathTemplate()
+		methods, _ := route.GetMethods()
+		if path == "" || len(methods) == 0 {
+			return nil
+		}
+		log.Printf("Route: %v %s", methods, path)
+		return nil
+	})
+
 	p := httpProc{addr: fmt.Sprintf(":%d", cfg.ListenPort)}
 	p.server.Addr = p.addr
 	p.server.Handler = r

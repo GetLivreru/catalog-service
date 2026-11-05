@@ -9,8 +9,6 @@ import (
 )
 
 func vGenericRegHealthCheck(r *mux.Router, h rhandler.Health) {
-	// TODO: зарегистрируйте GET /health
-	// Используйте: reg(r, http.MethodGet, "/health", http.HandlerFunc(h.LastCheck))
 	reg(r, http.MethodGet, "/health", http.HandlerFunc(h.LastCheck))
 }
 
