@@ -42,7 +42,7 @@ func NewClient(ctx context.Context, cfg section.RepositoryPostgres) (*Client, er
 	args := make(url.Values)
 	args.Set("sslmode", "disable")
 	u.RawQuery = args.Encode()
-	log.Printf("PostgreSQL timeouts read=%s write=%s", cfg.ReadTimeout, cfg.WriteTimeout)
+	log.Printf("Initializing PostgreSQL connection read_timeout=%s write_timeout=%s", cfg.ReadTimeout, cfg.WriteTimeout)
 
 	sqlDB := sql.OpenDB(pgdriver.NewConnector(
 		pgdriver.WithDSN(u.String()),
@@ -59,6 +59,7 @@ func NewClient(ctx context.Context, cfg section.RepositoryPostgres) (*Client, er
 		return nil, fmt.Errorf("failed to ping PostgreSQL: %w", err)
 	}
 
+	log.Printf("PostgreSQL connection established")
 	return &Client{_bunDB: db, rawBunDB: db, cfg: cfg}, nil
 }
 

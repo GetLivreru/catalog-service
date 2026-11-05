@@ -19,11 +19,13 @@ var Root Config
 
 func Load() {
 	// Загружаем переменные из .env.
-	// Если файла нет — игнорируем ошибку.
-	_ = godotenv.Load()
+	// Отсутствие файла не мешает запуску с переменными окружения.
+	if err := godotenv.Load(); err != nil {
+		log.Printf("No .env file found: %v", err)
+	}
 
 	// Заполняем Root из переменных окружения с префиксом APP.
 	if err := envconfig.Process("APP", &Root); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to load config: %v", err)
 	}
 }
