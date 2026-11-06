@@ -58,7 +58,7 @@ func TestJSONBinding(t *testing.T) {
 func assertBadRequest(t *testing.T, err error) {
 	t.Helper()
 	w := httptest.NewRecorder()
-	httph.HandleError(w, err)
+	httph.HandleError(w, httptest.NewRequest("GET", "/", nil), err)
 	if w.Code != http.StatusBadRequest {
 		t.Fatalf("status=%d: %s", w.Code, w.Body.String())
 	}

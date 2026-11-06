@@ -25,7 +25,7 @@ func TestHandleError(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			w := httptest.NewRecorder()
-			httph.HandleError(w, tc.err)
+			httph.HandleError(w, httptest.NewRequest("GET", "/", nil), tc.err)
 			var body map[string]string
 			if err := json.Unmarshal(w.Body.Bytes(), &body); err != nil {
 				t.Fatal(err)

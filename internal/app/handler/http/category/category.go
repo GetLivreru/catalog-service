@@ -19,12 +19,12 @@ func NewHandler(srv service.Category) rhandler.Category { return &handler{srv: s
 func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestCategoryCreate
 	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	item, err := h.srv.Create(r.Context(), req)
 	if err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	resp := entity.ResponseCategoryCreate{GUID: item.GUID, Name: item.Name, CreatedAt: item.CreatedAt}
@@ -34,17 +34,17 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 func (h *handler) Update(w http.ResponseWriter, r *http.Request) {
 	guid, err := uuid.FromString(mux.Vars(r)["guid"])
 	if err != nil || guid == uuid.Nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
+		httph.HandleError(w, r, entity.ErrIncorrectParameters)
 		return
 	}
 	var req entity.RequestCategoryUpdate
 	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	item, err := h.srv.Update(r.Context(), guid, req)
 	if err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	resp := entity.ResponseCategoryUpdate{GUID: item.GUID, Name: item.Name, CreatedAt: item.CreatedAt, UpdatedAt: item.UpdatedAt}
@@ -54,11 +54,11 @@ func (h *handler) Update(w http.ResponseWriter, r *http.Request) {
 func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 	guid, err := uuid.FromString(mux.Vars(r)["guid"])
 	if err != nil || guid == uuid.Nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
+		httph.HandleError(w, r, entity.ErrIncorrectParameters)
 		return
 	}
 	if err := h.srv.Delete(r.Context(), guid); err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	httph.SendEmpty(w, http.StatusOK)
@@ -67,7 +67,7 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 func (h *handler) List(w http.ResponseWriter, r *http.Request) {
 	item, err := h.srv.List(r.Context())
 	if err != nil {
-		httph.HandleError(w, err)
+		httph.HandleError(w, r, err)
 		return
 	}
 	resp := entity.ResponseCategoryList{Data: make([]entity.ResponseCategoryListItem, 0, len(item))}
