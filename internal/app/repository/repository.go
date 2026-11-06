@@ -8,7 +8,12 @@ import (
 	"github.com/GetLivreru/catalog-service/internal/app/entity"
 )
 
+type Transactional interface {
+	InsideTx(ctx context.Context, fn func(ctx context.Context) error) error
+}
+
 type Category interface {
+	Transactional
 	Create(ctx context.Context, category entity.Category) error
 	GetByGUIDs(ctx context.Context, guids []uuid.UUID) ([]entity.Category, error)
 	Update(ctx context.Context, category entity.Category) error
@@ -17,6 +22,7 @@ type Category interface {
 }
 
 type Product interface {
+	Transactional
 	Create(ctx context.Context, product entity.Product) error
 	GetByGUIDs(ctx context.Context, guids []uuid.UUID) ([]entity.Product, error)
 	Update(ctx context.Context, product entity.Product) error

@@ -60,7 +60,7 @@ func NewClient(ctx context.Context, cfg section.RepositoryPostgres) (*Client, er
 	}
 
 	log.Info().Msg("PostgreSQL connection established")
-	return &Client{_bunDB: db, rawBunDB: db, cfg: cfg}, nil
+	return &Client{_bunDB: newTxInjector(db), rawBunDB: db, cfg: cfg}, nil
 }
 
 func (c *Client) Migrate(ctx context.Context) (oldVer, newVer int64, err error) {
@@ -106,4 +106,29 @@ func migrationVersion(migrations migrate.MigrationSlice) (int64, error) {
 		version = max(version, v)
 	}
 	return version, nil
+}
+
+// InsideTx joins an existing transaction or commits all callback operations together.
+func (c *Client) InsideTx(ctx context.Context, fn func(ctx context.Context) error) error {
+	if tx := getTxFromContext(ctx); tx.Tx != nil {
+		return fn(ctx)
+	}
+	tx, err := c.rawBunDB.BeginTx(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("failed to begin transaction: %w", err)
+	}
+	done := false
+	defer func() {
+		if !done {
+			_ = tx.Rollback()
+		}
+	}()
+	if err := fn(setTxToContext(ctx, tx)); err != nil {
+		return err
+	}
+	done = true
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("failed to commit transaction: %w", err)
+	}
+	return nil
 }
