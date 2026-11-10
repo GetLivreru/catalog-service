@@ -8,6 +8,10 @@ import (
 	"github.com/GetLivreru/catalog-service/internal/app/entity"
 )
 
+type Migrate interface {
+	Migrate(ctx context.Context) (oldVer, newVer int64, err error)
+}
+
 type Transactional interface {
 	InsideTx(ctx context.Context, fn func(ctx context.Context) error) error
 }
