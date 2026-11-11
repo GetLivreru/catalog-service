@@ -14,7 +14,7 @@ func main() {
 		Name:     "catalog-service",
 		Version:  "1.0.0",
 		Usage:    "Catalog management service",
-		Commands: []*cli.Command{cmd.Migrate()},
+		Commands: []*cli.Command{cmd.Migrate(), cmd.WebServer()},
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
 				Name:  "no-json",
