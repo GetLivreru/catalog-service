@@ -1,0 +1,10 @@
+with-expecter: true
+dir: "{{.InterfaceDir}}/mocks"
+outpkg: mocks
+mockname: "Mock{{.InterfaceName}}"
+filename: "{{.InterfaceNameSnake}}_mock.go"
+packages:
+  github.com/GetLivreru/catalog-service/internal/app/repository:
+    interfaces:
+      Product:
+      Category:
